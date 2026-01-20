@@ -22,4 +22,3 @@ def limits():
         print(f"The limit of f(x) as x approaches {point_input} is: {limit_result}")
     except Exception as e:
         print(f"An error occurred: {e}")
-    return limit_result

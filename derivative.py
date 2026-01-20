@@ -17,4 +17,3 @@ def derivative():
         print(f"The derivative of f(x) with respect to x is: {derivative_result}")
     except Exception as e:
         print(f"An error occurred: {e}")
-    return derivative_result

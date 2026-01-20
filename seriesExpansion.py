@@ -27,4 +27,3 @@ def seriesExpansion():
         print(f"The series expansion of f(x) about {point} up to order {order} is: {series_result}")
     except Exception as e:
         print(f"An error occurred: {e}")
-    return series_result

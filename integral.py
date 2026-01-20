@@ -22,4 +22,3 @@ def integral():
         print(f"The integral of f(x) with respect to {var_input} is: {integral_result} + C")
     except Exception as e:
         print(f"An error occurred: {e}")
-    return integral_result
