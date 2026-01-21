@@ -1,24 +1,43 @@
+from turtledemo.forest import doit1
+
+from sympy import symbols
+from sympy import Limit, S
+from sympy import sympify
+import streamlit as st
+
 def limits():
-    from sympy import symbols, Limit, S
+    # Streamlit limits setup
+    st.title("Limits Solver")
+    st.write("You have chosen to solve limits.")
+    st.write("Please enter the function, the point to which x approaches, and the direction of the limit.")
+    st.text("Use 'x' as the variable in your function.")
+    st.text_input("Function f(x):", key="func_input")
+    st.text_input("Point to which x approaches:", key="point_input")
+    st.text_input("Direction of the limit ('+' for right-hand, '-' for left-hand, leave blank for both sides):", key="direction_input")
+
 
     x = symbols('x')
 
-    print("You have chosen limits.")
-    print("Please enter the function for which you want to find the limit (use 'x' as the variable):")
-    func_input = input("f(x) = ")
-    print("Please enter the point at which you want to find the limit (use 'oo' for infinity):")
-    point_input = input("Limit as x approaches: ")
+    # Retrieve inputs from Streamlit session state
+    func_input = st.session_state["func_input"]
+    point_input = st.session_state["point_input"]
+    direction_input = st.session_state["direction_input"]
+    st.button("Calculate Limit", on_click=calculate_limit(func_input, point_input, direction_input, x), args=(func_input, point_input, direction_input, x))
 
+
+def calculate_limit(func_input, point_input, direction_input,x):
     try:
         func = S(func_input)
-        if point_input == 'oo':
-            point = S.Infinity
-        elif point_input == '-oo':
-            point = S.NegativeInfinity
-        else:
-            point = S(point_input)
+        point = S(point_input)
 
-        limit_result = Limit(func, x, point).doit()
-        print(f"The limit of f(x) as x approaches {point_input} is: {limit_result}")
+        if direction_input == '+':
+            limit_result = Limit(func, x, point, dir='+').doit()
+        elif direction_input == '-':
+            limit_result = Limit(func, x, point, dir='-').doit()
+        else:
+            limit_result = Limit(func, x, point).doit()
+
+        st.write(f"The limit of f(x) as x approaches {point} is: {limit_result}")
+        st.pyplot(point)
     except Exception as e:
-        print(f"An error occurred: {e}")
+        st.write(f"An error occurred: {e}")

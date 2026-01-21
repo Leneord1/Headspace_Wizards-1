@@ -17,7 +17,7 @@ problem_type = st.selectbox(
     "Select Problem Type",
     ("Derivative", "Integral", "Limit", "Series Expansion", "Graphing")
 )
-enter_button = st.button("Enter")
+enter_button = st.button("Enter", key="enter_button")
 if problem_type == "Derivative":
     derivative()
 elif problem_type == "Integral":
