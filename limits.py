@@ -1,5 +1,5 @@
 from turtledemo.forest import doit1
-
+import matplotlib.pyplot as plt
 from sympy import symbols
 from sympy import Limit, S
 from sympy import sympify
@@ -38,6 +38,7 @@ def calculate_limit(func_input, point_input, direction_input,x):
             limit_result = Limit(func, x, point).doit()
 
         st.write(f"The limit of f(x) as x approaches {point} is: {limit_result}")
-        st.pyplot(point)
+        st.pyplot(limit_result)
+        plt.savefig("my_figure.png")
     except Exception as e:
         st.write(f"An error occurred: {e}")
